@@ -1,6 +1,5 @@
 package com.martraire.motivic;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,9 +25,21 @@ public class Grid {
 		int n = (int) (Math.log(pulsesCount) / Math.log(2));
 		for (int i = 0; i < pulsesCount; i++) {
 			int rank = pulseStrengh(n, i);
-			pulses.add(new Pulse(rank));
+			String beatName = beatName(i, beatsCount, pulsesCount);
+			int midiTick = midiTick(beatsCount, pulsesCount, i);
+			pulses.add(new Pulse(beatName, midiTick, rank));
 		}
 		return new Grid(name, pulses);
+	}
+
+	private static String beatName(int i, int beatsCount, int pulsesCount) {
+		int multiple = pulsesCount / beatsCount;
+		return "" + (i / multiple);
+	}
+
+	private static int midiTick(int beatsCount, int pulsesCount, int i) {
+		// midi clock is 24 ticks PQN (Per Quarter Note)
+		return i * 24 * beatsCount / pulsesCount;
 	}
 
 	/**
