@@ -33,8 +33,16 @@ public class Grid {
 	}
 
 	private static String beatName(int i, int beatsCount, int pulsesCount) {
-		int multiple = pulsesCount / beatsCount;
-		return "" + (i / multiple);
+		final int multiple = pulsesCount / beatsCount;
+		return beatNumber(i, multiple) + (isOffBeat(i, multiple) ? "" : ".");
+	}
+
+	private static int beatNumber(int i, int multiple) {
+		return (i / multiple) + 1;
+	}
+
+	private static boolean isOffBeat(int i, int multiple) {
+		return i % multiple == 0;
 	}
 
 	private static int midiTick(int beatsCount, int pulsesCount, int i) {
@@ -58,7 +66,7 @@ public class Grid {
 		int rank = pulse == 0 ? 1 : 0;
 		for (int j = 0; j < depth; j++) {
 			int modulo = (int) Math.pow(2, j);
-			rank += (pulse % modulo == 0) ? 1 : 0;
+			rank += isOffBeat(pulse, modulo) ? 1 : 0;
 		}
 		return rank - 1;
 	}
