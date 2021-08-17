@@ -27,7 +27,7 @@ public class Grid {
 			int rank = pulseStrengh(n, i);
 			String beatName = beatName(i, beatsCount, pulsesCount);
 			int midiTick = midiTick(beatsCount, pulsesCount, i);
-			pulses.add(new Pulse(beatName, midiTick, rank));
+			pulses.add(new Pulse(beatName, i, midiTick, rank));
 		}
 		return new Grid(name, pulses);
 	}

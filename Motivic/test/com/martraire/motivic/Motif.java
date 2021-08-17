@@ -3,8 +3,16 @@ package com.martraire.motivic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+/**
+ * A short sequence of notes, made of a pitch on a pulse; if there's no pitch
+ * it's a rhythm, if there's no pulse it's just a melodic contour.
+ * 
+ * A motif can also be viewed as a succession of intervals and durations.
+ */
 public class Motif {
+
 	private String name;
 	private final List<Note> notes;
 
@@ -22,8 +30,13 @@ public class Motif {
 		return new Motif(name, notes);
 	}
 
+	public Stream<Note> allNotes() {
+		return notes.stream();
+	}
+
 	@Override
 	public String toString() {
 		return name + " " + notes.stream().map(n -> n.toString()).collect(Collectors.joining(" "));
 	}
+
 }

@@ -1,6 +1,5 @@
 package com.martraire.motivic;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class Palette {
 
 	@Override
 	public String toString() {
-		return name + ": " + allPitches().map(p -> p.name).collect(Collectors.joining(" "));
+		return name + ": " + allPitches().map(p -> p.name()).collect(Collectors.joining(" "));
 	}
 
 	public Stream<Pitch> allPitches() {
@@ -47,7 +46,7 @@ public class Palette {
 	/**
 	 * Calculates the rank in the tonal hierarchy, from strongest to weakest:
 	 * tonic, tonic triad, diatonic, non-diatonic
-	 *  
+	 * 
 	 * @param degree
 	 *            the degree of the pitch within its scale
 	 * @return 3 for the tonic and 1 for diatonic pitches
